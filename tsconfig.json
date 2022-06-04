@@ -1,0 +1,19 @@
+{
+    "extends": "ts-node/node12/tsconfig.json",
+    "ts-node": {
+        "transpileOnly": true,
+        "files": true,
+        "compilerOptions": {}
+    },
+    "compilerOptions": {
+        "target": "esnext",
+        "allowJs": true,
+        "strict": false,
+        "lib": ["es6"],
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "strictNullChecks": true,
+        "experimentalDecorators": true,
+    }
+}
