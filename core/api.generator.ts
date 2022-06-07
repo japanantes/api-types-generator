@@ -1,6 +1,6 @@
 import fs from "fs/promises";
+import { Method, PropertyType, RequestInput, RequestOutput, Route } from "..";
 import { getPropertyType } from "../express/decorators/route.decorator";
-import ATGen, { RequestInput, RequestOutput, Route } from "../types/types";
 import { TypesRegister } from "./types.register";
 
 export class ApiGenerator {
@@ -25,7 +25,7 @@ export class ApiGenerator {
         ts += this.generateRouteTypeTS();
         ts += this.generateMethodEnumTS();
         ts += this.generateRegisteredTypesTS();
-        const routesTypes: { [type in ATGen.Method]: string[] } = {
+        const routesTypes: { [type in Method]: string[] } = {
             get: [],
             post: [],
         };
@@ -39,7 +39,7 @@ export class ApiGenerator {
 
     private generateMethodEnumTS() {
         let ts = `\nexport enum Method {`;
-        Object.values(ATGen.Method).forEach((method) => (ts += `\n\t${method},`));
+        Object.values(Method).forEach((method) => (ts += `\n\t${method},`));
         ts += "\n}\n\n";
         return ts;
     }
@@ -63,7 +63,7 @@ export class ApiGenerator {
         return `\ntype Route = {name: string; method: Method; path: string; requireAuth?: boolean | undefined; data?: any | undefined; res:any};\n\n`;
     }
 
-    private generateRoutesTypes(routesTypes: { [type in ATGen.Method]: string[] }) {
+    private generateRoutesTypes(routesTypes: { [type in Method]: string[] }) {
         let types = "";
         Object.entries(routesTypes).forEach(([method, routes]) => {
             types += `\nexport type T${method.toUpperCase()}Routes = Route${routes.join(
@@ -120,19 +120,19 @@ export const getRequest${name} = (${
         Object.entries(type).forEach(([property, type]) => {
             if (property !== "__required__")
                 switch (getPropertyType(type)) {
-                    case ATGen.PropertyType.BASE:
+                    case PropertyType.BASE:
                         ts += `\n\t\t${property}${
                             type.__required__ ? ":" : "?:"
                         }${type.__nullable__ ? " null |" : ""} ${
                             type.__type__
                         };`;
                         break;
-                    case ATGen.PropertyType.ARRAY:
+                    case PropertyType.ARRAY:
                         ts += `\n\t\t${property}${
                             type.__required__ !== false ? ":" : "?:"
                         } ${this.generateInputTypeTS(type.__array__)}[];`;
                         break;
-                    case ATGen.PropertyType.OBJECT:
+                    case PropertyType.OBJECT:
                         ts += `\n\t\t${property}${
                             type.__required__ !== false ? ":" : "?:"
                         }${
@@ -151,19 +151,19 @@ export const getRequest${name} = (${
         Object.entries(type).forEach(([property, type]) => {
             if (property !== "__required__")
                 switch (getPropertyType(type)) {
-                    case ATGen.PropertyType.BASE:
+                    case PropertyType.BASE:
                         ts += `\n\t\t${property}${
                             type.__required__ ? ":" : "?:"
                         }${type.__nullable__ ? " null |" : ""} ${
                             type.__type__
                         };`;
                         break;
-                    case ATGen.PropertyType.ARRAY:
+                    case PropertyType.ARRAY:
                         ts += `\n\t\t${property}${
                             type.__required__ !== false ? ":" : "?:"
                         } ${this.generateOutputTypeTS(type.__array__)}[];`;
                         break;
-                    case ATGen.PropertyType.OBJECT:
+                    case PropertyType.OBJECT:
                         ts += `\n\t\t${property}${
                             type.__required__ !== false ? ":" : "?:"
                         }${

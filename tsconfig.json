@@ -12,8 +12,10 @@
         "lib": ["es6"],
         "esModuleInterop": true,
         "sourceMap": true,
+        "declaration": true,
         "outDir": "./dist",
         "strictNullChecks": true,
-        "experimentalDecorators": true,
-    }
+        "experimentalDecorators": true
+    },
+    "exclude": ["node_modules", "dist"]
 }

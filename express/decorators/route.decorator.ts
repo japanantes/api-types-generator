@@ -1,14 +1,13 @@
 import { Request, Response } from "express";
-import { ApiGenerator } from "../../core/api.generator";
-import { InvalidRequestError } from "../../errors/invalid-request.error";
 import {
     InputProperty,
-    Route,
+    PropertyType,
     RequestInput,
-    ATGen,
-    RequestOutput,
     Requirements,
-} from "../../types/types";
+    Route,
+} from "../..";
+import { ApiGenerator } from "../../core/api.generator";
+import { InvalidRequestError } from "../../errors/invalid-request.error";
 import { ExpressProvider } from "../express.provider";
 
 export function route<In = any, Out = any>({
@@ -82,11 +81,11 @@ function checkRequirements(required: Requirements, req: Request) {
 function validateSchema(schema: RequestInput<any>, object: any) {
     for (let [property, type] of Object.entries(schema)) {
         switch (getPropertyType(type)) {
-            case ATGen.PropertyType.BASE:
+            case PropertyType.BASE:
                 if (!object[property] && !type.__required__) break;
                 if (typeof object[property] !== type.__type__) return false;
                 break;
-            case ATGen.PropertyType.ARRAY:
+            case PropertyType.ARRAY:
                 if (!object[property] && type.__required__) return false;
                 if (object[property])
                     for (let elem of object[property]) {
@@ -94,7 +93,7 @@ function validateSchema(schema: RequestInput<any>, object: any) {
                         if (!val) return false;
                     }
                 break;
-            case ATGen.PropertyType.OBJECT:
+            case PropertyType.OBJECT:
                 if (!object[property] && !type.__required__) break;
                 if (
                     !object[property] ||
@@ -118,7 +117,7 @@ export function getPropertyType(type: InputProperty<any>) {
             ["__type__", "__required__", "__nullable__"].includes(key)
         )
     ) {
-        return ATGen.PropertyType.BASE;
+        return PropertyType.BASE;
     } else if (
         keys.length >= 1 &&
         keys.length <= 3 &&
@@ -127,9 +126,9 @@ export function getPropertyType(type: InputProperty<any>) {
             ["__array__", "__required__", "__nullable__"].includes(key)
         )
     ) {
-        return ATGen.PropertyType.ARRAY;
+        return PropertyType.ARRAY;
     } else {
-        return ATGen.PropertyType.OBJECT;
+        return PropertyType.OBJECT;
     }
 }
 

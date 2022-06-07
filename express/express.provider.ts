@@ -1,7 +1,7 @@
 import { Express, Response, NextFunction, RequestHandler } from "express";
 import { IRouterMatcher } from "express-serve-static-core";
 import { Error } from "../errors/errors";
-import { ILogger } from "../types/types";
+import { ILogger } from "..";
 
 export class ExpressProvider {
     private static instance: ExpressProvider = new ExpressProvider();

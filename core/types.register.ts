@@ -1,4 +1,4 @@
-import { Route } from "../types/types";
+import { Route } from "..";
 
 export class TypesRegister {
     private static instance: TypesRegister = new TypesRegister();
