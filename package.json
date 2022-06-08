@@ -1,9 +1,10 @@
 {
   "name": "@japanantes/atgen",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A package to generate types and functions to abstract api usage.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://japanantes.github.io/",
   "files": [
     "dist"
   ],
