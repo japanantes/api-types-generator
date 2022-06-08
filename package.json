@@ -1,9 +1,10 @@
 {
   "name": "@japanantes/atgen",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A package to generate types and functions to abstract api usage.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "homepage": "https://japanantes.github.io/",
   "files": [
     "dist"
   ],
@@ -28,6 +29,7 @@
     "@types/typescript": "^2.0.0",
     "ts-loader": "^9.3.0",
     "ts-node": "^10.8.1",
+    "typedoc": "^0.22.17",
     "typescript": "^4.7.3",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.9.2",

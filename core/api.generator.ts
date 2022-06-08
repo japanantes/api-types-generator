@@ -3,6 +3,9 @@ import { Method, PropertyType, RequestInput, RequestOutput, Route } from "..";
 import { getPropertyType } from "../express/decorators/route.decorator";
 import { TypesRegister } from "./types.register";
 
+/**
+ * Singleton which is the core of this library, used to generate the types file.
+ */
 export class ApiGenerator {
     private static instance: ApiGenerator = new ApiGenerator();
     private routes: Map<string, Route>;
@@ -12,14 +15,26 @@ export class ApiGenerator {
         this.routes = new Map<string, Route>();
     }
 
+    /**
+     * @returns The singleton instance.
+     */
     static getInstance() {
         return ApiGenerator.instance;
     }
 
+    /**
+     * A function called by the decorator {@link route}
+     * to add a route to the list to generate.
+     * @param name the name of the route.
+     * @param route the `Route` object.
+     */
     registerRoute(name: string, route: Route) {
         this.routes.set(name, route);
     }
 
+    /**
+     * A function that generates the typescript output file.
+     */
     generateApiRegister() {
         let ts = "// Generated content, don't touch\n\n";
         ts += this.generateRouteTypeTS();

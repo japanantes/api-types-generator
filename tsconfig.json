@@ -17,5 +17,9 @@
         "strictNullChecks": true,
         "experimentalDecorators": true
     },
+    "typedocOptions": {
+        "entryPoints": ["index.ts"],
+        "out": "docs"
+    },
     "exclude": ["node_modules", "dist"]
 }
