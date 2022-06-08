@@ -9,7 +9,7 @@ You can install it with `npm` like : `npm install @japanantes/atgen`.
 
 ## How to use
 
-This is a simple sep by step explanation for more details refer to the doc : (_link_).
+This is a simple step by step explanation for more details refer to the doc : [ATGen Docs](https://japanantes.github.io/docs/).
 
 This library works with `ExpressJS`, you must first configure it as followed :
 
@@ -46,3 +46,5 @@ import { ApiGenerator } from "@japanantes/atgen/dist";
 ApiGenerator.getInstance().generateApiRegister();
 
 ```
+
+**The path of the output file must be configured in `process.env.ATGEN_TYPES_FOLDERPATH`.**
