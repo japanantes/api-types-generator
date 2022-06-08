@@ -10,6 +10,18 @@ import { ApiGenerator } from "../../core/api.generator";
 import { InvalidRequestError } from "../../errors/invalid-request.error";
 import { ExpressProvider } from "../express.provider";
 
+/**
+ * This decorator needs {@link ExpressProvider} to be initialized.
+ * @param param0 The request body type for `In` and the response type for `Out`.
+ * An object containing :
+ *  - `name`?: the name of the endpoint if defined.
+ *  - `method`: the HTTP Method, from {@link Method} .
+ *  - `path`: the endpoint's path after the host.
+ *  - `auth`?: a boolean value specifying wether or not this needs authentication, default is false.
+ *  - `required`?: an object which describes the required contents of the request if defined, details at {@link ATGen.Route}.
+ *  - `response`?: the response object type if defined.
+ * @returns A function decorator that will create the route described with `param0` .
+ */
 export function route<In = any, Out = any>({
     name,
     method,

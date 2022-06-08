@@ -1,3 +1,6 @@
+/**
+ * Custom error interface.
+ */
 export interface Error {
     code: number;
     name: string;
