@@ -9,7 +9,7 @@ You can install it with `npm` like : `npm install @japanantes/atgen`.
 
 ## How to use
 
-This is a simple step by step explanation for more details refer to the doc : [ATGen Docs](https://japanantes.github.io/docs/).
+This is a simple step by step explanation for more details refer to the doc : [ATGen Docs](https://japanantes.github.io/api-types-generator/docs/).
 
 This library works with `ExpressJS`, you must first configure it as followed :
 
